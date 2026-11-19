@@ -44,6 +44,62 @@ A sample business dataset representing the relationship between **Advertising Ex
 | | `plt.title()`, `plt.xlabel()`, `plt.ylabel()`, `plt.show()` | Configure and display the regression plot |
 
 ##  Program & Output
+# Step 1: Import Required Libraries  
+import numpy as np  
+import pandas as pd  
+import matplotlib.pyplot as plt  
+from sklearn.linear_model import LinearRegression  
+
+# Step 2: Create Dataset (Example Data Points)  
+# Example: Predicting Sales based on Advertising Budget  
+data = {  
+    'Advertising': [18, 22, 25, 30, 35, 40, 45, 50, 55, 60],  
+    'Sales': [12, 18, 20, 24, 28, 35, 38, 40, 42, 45]  
+}
+
+# Create DataFrame    
+df = pd.DataFrame(data)  
+print("----- Dataset -----")  
+print(df)  
+
+# Step 3: Prepare Input (X) and Output (Y) Variables  
+X = np.array(df['Advertising']).reshape(-1, 1)  # Independent variable  
+Y = np.array(df['Sales'])                       # Dependent variable  
+
+# Step 4: Build and Train the Linear Regression Model  
+model = LinearRegression()  
+model.fit(X, Y)  
+
+# Step 5: Display Model Coefficients  
+print("\nIntercept (a):", model.intercept_)  
+print("Slope (b):", model.coef_[0])  
+
+# Regression Equation: Y = a + bX  
+print(f"\nRegression Equation: Y = {model.intercept_:.2f} + {model.coef_[0]:.2f}X")  
+
+# Step 6: Predict Y for Given X Values  
+Y_pred = model.predict(X)  
+print("\nPredicted Sales Values:")  
+print(Y_pred)  
+
+# Step 7: Evaluate Model Performance  
+r2 = model.score(X, Y)  
+print("\nModel Performance:")  
+print(f"R² Score = {r2:.4f}")  
+
+# Step 8: Visualize Regression Line  
+plt.figure(figsize=(8, 6))    
+plt.scatter(X, Y, color='blue', label='Actual Data Points')  
+plt.plot(X, Y_pred, color='red', linewidth=2, label='Regression Line')  
+plt.title("Simple Linear Regression: Advertising vs Sales")  
+plt.xlabel("Advertising Budget (in ₹ Lakhs)")  
+plt.ylabel("Sales (in ₹ Crores)")  
+plt.legend()  
+plt.show()  
+
+<img width="720" height="572" alt="image" src="https://github.com/user-attachments/assets/19f4e174-2aac-4bdd-bbaf-3dc2e61519ae" />
+
+<img width="382" height="280" alt="image" src="https://github.com/user-attachments/assets/60955aee-3009-4a95-9dcf-33ab4489cfdb" />
 
 
 ##  Result
